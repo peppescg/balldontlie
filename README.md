@@ -13,6 +13,11 @@ The routes home and detail are code split and there is tree-shaking for better p
 - Better use of react API hooks, for memoize props and function avoiding rerender of the detail component
 - Other unit tests
 - A bunch of players in the Home, because now it is too empty 
+
+### Run production 
+
+### `yarn build && yarn serve`
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
