@@ -38,5 +38,6 @@
   },
   "resolutions": {
     "jest-environment-jsdom": "^26.0.1"
-  }
+  },
+  "sideEffects": false
 }
