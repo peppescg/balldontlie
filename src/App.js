@@ -1,24 +1,27 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Router } from "@reach/router";
-import logo from "./logo.svg";
-import Home from "./routes/Home";
-import Detail from "./routes/Detail";
 import "./App.css";
+
+const LazyDetail = React.lazy(() => import("./routes/Detail"));
+const LazyHome = React.lazy(() => import("./routes/Home"));
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+      <header></header>
       <main>
-        <Router>
-          <Home path="/" />
-          <Detail path="detail/:id" />
-        </Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router>
+            <LazyHome path="/" />
+            <LazyDetail path="detail/:id" />
+            <NotFound default />
+          </Router>
+        </Suspense>
       </main>
     </div>
   );
 }
 
 export default App;
+
+const NotFound = () => <div>Sorry, nothing here.</div>;

@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { createHistory, LocationProvider } from "@reach/router";
-import { RecoilRoot } from "recoil";
 import "./index.css";
+import { ContextProvider } from "./state";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -17,15 +17,15 @@ const theme = createMuiTheme({
 let history = createHistory(window);
 
 ReactDOM.render(
-  <LocationProvider history={history}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <LocationProvider history={history}>
       <ThemeProvider theme={theme}>
-        <RecoilRoot>
+        <ContextProvider>
           <App />
-        </RecoilRoot>
+        </ContextProvider>
       </ThemeProvider>
-    </React.StrictMode>
-  </LocationProvider>,
+    </LocationProvider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
