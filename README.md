@@ -1,3 +1,20 @@
+## App description
+---
+The app use the public api for retrieving data about NBA players:
+- https://www.balldontlie.io/api/v1/players
+- https://www.balldontlie.io/api/v1/season_averages
+- https://nba-players.herokuapp.com/players/{last_name}/{first_name}
+
+There are three routes `home` with search box input text to search the player, the `detail` route for pics and stats about the player. The last route is default `notFound`.
+
+The routes home and detail are code split and there is tree-shaking for better performance. Through API react Context, the data are stored into the state, so every current player (every time the detail page is visited) is stored into the app state, avoiding call API again.
+
+### TODO
+- Better use of react API hooks, for memoize props and function avoiding rerender of the detail component
+- Other unit tests
+- A bunch of players in the Home, because now it is too empty 
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
