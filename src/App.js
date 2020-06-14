@@ -1,15 +1,46 @@
 import React, { Suspense } from "react";
-import { Router } from "@reach/router";
-import "./App.css";
+import { Router, Link } from "@reach/router";
+import { makeStyles } from "@material-ui/core/styles";
 
 const LazyDetail = React.lazy(() => import("./routes/Detail"));
 const LazyHome = React.lazy(() => import("./routes/Home"));
 
+const useStyles = makeStyles((theme) => ({
+  mainContent: {
+    margin: "2rem 5rem",
+  },
+  header: {
+    backgroundColor: theme.palette.primary.light,
+    height: "7vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "& > h1,a": {
+      margin: "0 auto",
+      padding: "0",
+      color: theme.palette.common.white,
+      textDecoration: "none",
+    },
+  },
+  footer: {
+    height: "4vh",
+    backgroundColor: theme.palette.grey["900"],
+    color: theme.palette.common.white,
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: "1rem",
+  },
+}));
+
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header></header>
-      <main>
+    <>
+      <Header />
+      <main className={classes.mainContent}>
         <Suspense fallback={<div>Loading...</div>}>
           <Router>
             <LazyHome path="/" />
@@ -18,10 +49,27 @@ function App() {
           </Router>
         </Suspense>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
 
 export default App;
 
 const NotFound = () => <div>Sorry, nothing here.</div>;
+
+const Header = () => {
+  const classes = useStyles();
+  return (
+    <header className={classes.header}>
+      <Link to="/">
+        <h1>BallDontLie</h1>
+      </Link>
+    </header>
+  );
+};
+
+const Footer = () => {
+  const classes = useStyles();
+  return <footer className={classes.footer}>Giuseppe Scuglia</footer>;
+};
