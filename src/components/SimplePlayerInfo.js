@@ -41,6 +41,7 @@ const SimplePlayerInfo = ({
 
   return (
     <CardHeader
+      data-testid={`${last_name}-${first_name}`}
       className={`${classes.header} ${overrideClasses}`}
       avatar={
         <Avatar aria-label="recipe" className={classes.avatar}>

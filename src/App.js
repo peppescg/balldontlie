@@ -8,7 +8,7 @@ const LazyHome = React.lazy(() => import("./routes/Home"));
 
 const useStyles = makeStyles((theme) => ({
   mainContent: {
-    margin: "2rem 5rem",
+    margin: "2rem 3rem",
   },
   header: {
     backgroundColor: theme.palette.primary.light,

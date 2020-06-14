@@ -62,6 +62,7 @@ const Home = () => {
         <TextField
           size="medium"
           fullWidth
+          inputProps={{ "data-testid": "content-input" }}
           label="Search a player..."
           onChange={(e) => fetchData(e.target.value)}
         />

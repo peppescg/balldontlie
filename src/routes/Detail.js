@@ -12,9 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Detail = ({ id }) => {
   const classes = useStyles();
-  const [{ currentPlayer, currentPlayerStats, loading }, dispatch] = useContext(
-    Context
-  );
+  const [{ currentPlayer, loading }, dispatch] = useContext(Context);
 
   useEffect(() => {
     if (currentPlayer && currentPlayer.id === Number(id)) {
