@@ -1,5 +1,5 @@
 ## App description
----
+
 The app use the public api for retrieving data about NBA players:
 - https://www.balldontlie.io/api/v1/players
 - https://www.balldontlie.io/api/v1/season_averages
