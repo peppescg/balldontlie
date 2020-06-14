@@ -3,8 +3,10 @@ import { actionHandlers } from "./reducer";
 
 const initialState = {
   players: [],
-  loading: false,
   currentPlayer: null,
+  currentPlayerPic: null,
+  currentPlayerStats: null,
+  loading: false,
 };
 
 /**

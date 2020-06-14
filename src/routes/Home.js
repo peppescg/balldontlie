@@ -12,6 +12,7 @@ import { Context } from "../state";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    justifyContent: "center",
   },
   card: {
     width: "16rem",
@@ -21,14 +22,17 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    margin: "0 40rem",
+    margin: "2vh 30vw",
   },
   players: {
-    margin: "2rem 0",
-    display: "flex",
-    justifyContent: "start",
-    "&:last-child": {
-      jsutifyContent: "start",
+    "&:after": {
+      content: "",
+      flex: "auto",
+    },
+  },
+  [theme.breakpoints.down("md")]: {
+    searchBox: {
+      margin: "2vh 10vw",
     },
   },
 }));
@@ -41,6 +45,15 @@ const Home = () => {
     const data = await getPlayers(params);
     dispatch({ type: actions.SET_PLAYERS, payload: data });
   }
+
+  const goTo = (id) => {
+    dispatch({
+      type: actions.SET_LOADING,
+      payload: true,
+    });
+    dispatch({ type: actions.SET_PLAYERS, payload: [] });
+    navigate(`detail/${id}`);
+  };
 
   const classes = useStyles();
   return (
@@ -55,14 +68,19 @@ const Home = () => {
       </form>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Grid className={classes.players} container spacing={2}>
+          <Grid
+            className={classes.players}
+            justify="center"
+            container
+            spacing={2}
+          >
             {players.map((player) => (
               <Grid key={player.id} item>
                 <Card className={classes.root}>
                   <SimplePlayerInfo
                     key={player.id}
                     {...player}
-                    onClick={() => navigate(`detail/${player.id}`)}
+                    onClick={() => goTo(player.id)}
                   />
                 </Card>
               </Grid>

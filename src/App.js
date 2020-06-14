@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Router, Link } from "@reach/router";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 
 const LazyDetail = React.lazy(() => import("./routes/Detail"));
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     paddingLeft: "1rem",
   },
+  loader: theme.loader,
 }));
 
 function App() {
@@ -41,7 +43,9 @@ function App() {
     <>
       <Header />
       <main className={classes.mainContent}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={<CircularProgress size="4rem" className={classes.loader} />}
+        >
           <Router>
             <LazyHome path="/" />
             <LazyDetail path="detail/:id" />

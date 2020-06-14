@@ -38,4 +38,13 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: "16px",
     paddingRight: "16px",
   },
+  [theme.breakpoints.down("md")]: {
+    card: {
+      width: "auto",
+      "& span": {
+        fontSize: theme.typography.fontSize,
+      },
+    },
+  },
+  loader: theme.loader,
 }));

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,8 +10,8 @@ import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { getPlayerStats, getPlayerPic } from "../../data";
 import { useStyles } from "./style";
+import { Context } from "../../state";
 
 const keyStats = [
   ["min", "fgm", "fga", "fg3m", "fg3a", "ftm", "fta", "oreb", "dreb"],
@@ -40,20 +40,7 @@ const Player = React.memo(
     height_feet,
   }) => {
     const classes = useStyles();
-    const [stats, setStats] = React.useState();
-    const [images, setImages] = React.useState();
-
-    useEffect(() => {
-      async function getStats() {
-        const img = await getPlayerPic(last_name, first_name);
-        setImages(img);
-        const { data } = await getPlayerStats(id);
-        if (data.length) {
-          setStats(data[0]);
-        }
-      }
-      getStats();
-    }, [id, first_name, last_name]);
+    const [{ currentPlayerPic, currentPlayerStats }] = useContext(Context);
 
     return (
       <div className={classes.root}>
@@ -68,10 +55,10 @@ const Player = React.memo(
                 team={team}
               />
               <Card className={classes.root}>
-                {images ? (
+                {currentPlayerPic ? (
                   <CardMedia
                     className={classes.media}
-                    image={images}
+                    image={currentPlayerPic}
                     title={`${last_name} ${first_name}`}
                     alt={`${last_name} ${first_name}`}
                   />
@@ -87,11 +74,11 @@ const Player = React.memo(
                 <Grid item xs>
                   <CardContent>
                     <Typography color="textSecondary" component="div">
-                      {stats ? (
+                      {currentPlayerStats ? (
                         <Grid item xs container direction="row" spacing={2}>
                           <Typography variant="h6" className={classes.title}>
                             <ListItemText
-                              primary={`Season: ${stats["season"]}, Games: ${stats.games_played}`}
+                              primary={`Season: ${currentPlayerStats["season"]}, Games: ${currentPlayerStats.games_played}`}
                             />
                           </Typography>
                           <Grid container spacing={2}>
@@ -104,7 +91,7 @@ const Player = React.memo(
                                     />
                                     <ListItemText
                                       className={classes.value}
-                                      primary={stats[key]}
+                                      primary={currentPlayerStats[key]}
                                     />
                                   </ListItem>
                                 ))}
@@ -119,7 +106,7 @@ const Player = React.memo(
                                     />
                                     <ListItemText
                                       className={classes.value}
-                                      primary={stats[key]}
+                                      primary={currentPlayerStats[key]}
                                     />
                                   </ListItem>
                                 ))}

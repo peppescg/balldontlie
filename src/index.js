@@ -12,6 +12,11 @@ const theme = createMuiTheme({
   palette: {
     primary: { 500: "#467fcf" },
   },
+  loader: {
+    position: "fixed",
+    left: "50%",
+    top: "50%",
+  },
 });
 
 let history = createHistory(window);
